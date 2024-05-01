@@ -1,0 +1,39 @@
+@use "../abstracts/" as a;
+
+
+.loginMain {
+    height:65.5%;
+    background-color: antiquewhite;
+    padding:5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include a.media-max(medium) {
+        height:69%;
+    }
+}
+
+
+.productsMain {
+    display:grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-gap:1em;
+    justify-content: center;
+    align-items: center;
+    margin:5em;
+        
+        
+    @include a.media-max(medium){
+        grid-template-columns: auto auto auto auto;
+    }
+    @include a.media-max(small){
+        grid-template-columns: auto auto auto;
+    }
+    
+    @include a.media-max(very-small){
+        grid-template-columns: auto auto;
+    }
+    @include a.media-max(tiny){
+        grid-template-columns: auto;
+    }
+}

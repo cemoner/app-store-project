@@ -1,0 +1,387 @@
+body {
+  background-color: rgb(250, 246, 241);
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  width: 100%;
+  min-width: 150px;
+  max-width: 2560px;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  margin: 0 auto;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root {
+  --clr-primary-gray: hsl(0, 0%, 63%);
+  --clr-primary-dark-gray: hsl(0, 0%, 27%);
+  --clr-primary-white: hsl(0, 0%, 100%);
+  --clr-primary-black: hsl(0, 0%, 0%);
+  --ff-primary: "spartan", sans-serif;
+  --fs-400: 0.75rem;
+}
+
+body {
+  font-family: "Play", serif;
+}
+
+html {
+  font-size: 60%;
+}
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 52.5%;
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 3em 0;
+  height: 100%;
+  background-color: rgb(250, 241, 226);
+}
+@media screen and (max-width: 768px) {
+  nav {
+    justify-content: space-between;
+    padding: 3em 3em;
+    flex-wrap: wrap;
+  }
+}
+
+.loginMain {
+  height: 65.5%;
+  background-color: antiquewhite;
+  padding: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 992px) {
+  .loginMain {
+    height: 69%;
+  }
+}
+
+.productsMain {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-gap: 1em;
+  justify-content: center;
+  align-items: center;
+  margin: 5em;
+}
+@media screen and (max-width: 992px) {
+  .productsMain {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+@media screen and (max-width: 768px) {
+  .productsMain {
+    grid-template-columns: auto auto auto;
+  }
+}
+@media screen and (max-width: 576px) {
+  .productsMain {
+    grid-template-columns: auto auto;
+  }
+}
+@media screen and (max-width: 380px) {
+  .productsMain {
+    grid-template-columns: auto;
+  }
+}
+
+footer {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  padding: 3em 0;
+  background-color: rgb(252, 232, 205);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--clr-primary-black);
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  padding: 0.5em;
+}
+
+.navigation-list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+}
+@media screen and (max-width: 768px) {
+  .navigation-list {
+    background-color: rgb(248, 243, 228);
+    z-index: 2;
+    position: absolute;
+    flex-direction: column;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 2em 0;
+    width: 0;
+    align-items: center;
+    justify-content: flex-start;
+    transform-origin: left;
+    opacity: 0;
+    transition: width 0.25s, opacity 0.25s;
+  }
+}
+
+.nav-opened {
+  width: 50%;
+  opacity: 1;
+}
+
+.footer-list {
+  list-style-type: none;
+  padding: 0em;
+  margin: 0;
+}
+
+.nav-item {
+  font-size: 2em;
+  padding: 0 1.5em;
+}
+@media screen and (max-width: 768px) {
+  .nav-item {
+    padding: 0.75em 0;
+  }
+}
+
+.nav-item::after {
+  content: "";
+  background-color: var(--clr-primary-black);
+  height: 0.2rem;
+  display: block;
+  transform: scale(0);
+  transform-origin: left;
+  transition: transform 0.25s;
+}
+
+li:hover::after {
+  transform: scale(1);
+  transform-origin: right;
+}
+
+.footer-item {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 0.5em 0em;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  padding: 0em;
+  justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+  .buttons {
+    margin-top: 3em;
+    flex-basis: 100%;
+  }
+}
+
+.login {
+  border: none;
+  padding: 0.65em 2em;
+  border-radius: 2.5em;
+  margin-left: 0.65em;
+  font-size: 1.5em;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  background-color: rgba(218, 223, 230, 0.3);
+  cursor: pointer;
+}
+
+.svg-container {
+  max-width: 100%;
+  width: 4em;
+  text-align: center;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.logo {
+  width: 5em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.svg-container:hover {
+  opacity: 0.5;
+}
+
+.hamburger-menu-icon {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .hamburger-menu-icon {
+    display: block;
+    max-width: 100%;
+    width: 4em;
+  }
+}
+
+.shopping-cart {
+  cursor: pointer;
+}
+
+input {
+  font-size: 1.75em;
+  background-color: transparent;
+  padding: 0.65em;
+  border-radius: 2.5em;
+  width: 100%;
+  background-color: rgba(219, 231, 247, 0.3);
+  border: none;
+}
+@media screen and (max-width: 576px) {
+  input {
+    font-size: 1.75em;
+  }
+}
+
+.search-button {
+  border-radius: 2.5em;
+  margin-left: 1em;
+}
+
+.search-button:hover {
+  background-color: rgba(198, 203, 211, 0.75);
+}
+
+.loginForm {
+  width: 60%;
+}
+@media screen and (max-width: 768px) {
+  .loginForm {
+    width: 90%;
+  }
+}
+
+#usernameLabel {
+  margin-top: 2em;
+}
+
+label {
+  font-size: 2em;
+}
+
+#password {
+  margin-bottom: 1em;
+}
+
+.productName, .productCategory, .productPrice {
+  margin-top: 0.5em;
+  font-size: 2em;
+}
+
+.productImage {
+  max-width: 17.5em;
+}
+
+.productContainer {
+  padding: 1em;
+  border: solid 0.5em rgb(255, 233, 203);
+  border-radius: 2em;
+}/*# sourceMappingURL=main.css.map */

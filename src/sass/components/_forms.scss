@@ -1,0 +1,44 @@
+@use "../abstracts/" as a;
+
+
+input {
+    font-size:1.75em;
+    background-color: transparent;
+    padding:0.65em;
+    border-radius: 2.5em;
+    width:100%;
+    background-color: rgba(219, 231, 247, 0.3);
+    border:none;
+    @include a.media-max(very-small) {
+            font-size:1.75em;
+        }
+}
+
+.search-button {
+    border-radius: 2.5em;
+    margin-left:1em;
+}
+
+.search-button:hover {
+    background-color: rgba(198, 203, 211, 0.75);
+}
+
+
+.loginForm {
+    width:60%;
+    @include a.media-max(small){
+        width:90%;
+    }
+}
+
+#usernameLabel {
+    margin-top: 2em;
+}
+
+label {
+    font-size:2em;
+}
+
+#password {
+    margin-bottom:1em;
+}
