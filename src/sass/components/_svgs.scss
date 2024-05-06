@@ -16,7 +16,7 @@
 
 
 .svg-container:hover {
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 .hamburger-menu-icon {
@@ -30,4 +30,6 @@
 
 .shopping-cart {
     cursor: pointer;
+    background-color: none;
+    border:none;
 }

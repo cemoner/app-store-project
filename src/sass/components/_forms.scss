@@ -14,15 +14,17 @@ input {
         }
 }
 
-.search-button {
+#search {
     border-radius: 2.5em;
     margin-left:1em;
 }
 
-.search-button:hover {
-    background-color: rgba(198, 203, 211, 0.75);
+.searchForm {
+    display: flex;
+    flex-direction: row;
+    margin-left:0.5em;
+    justify-content: center;
 }
-
 
 .loginForm {
     width:60%;
@@ -41,4 +43,12 @@ label {
 
 #password {
     margin-bottom:1em;
+}
+
+.addForm {
+    padding:2em;
+}
+
+.productInput {
+    font-size:1em;
 }

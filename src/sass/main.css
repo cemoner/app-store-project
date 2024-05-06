@@ -147,30 +147,38 @@ nav {
 }
 
 .productsMain {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.products {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 1em;
   justify-content: center;
   align-items: center;
-  margin: 5em;
+  margin: 2.5em 5em;
 }
 @media screen and (max-width: 992px) {
-  .productsMain {
+  .products {
     grid-template-columns: auto auto auto auto;
   }
 }
 @media screen and (max-width: 768px) {
-  .productsMain {
+  .products {
     grid-template-columns: auto auto auto;
   }
 }
 @media screen and (max-width: 576px) {
-  .productsMain {
+  .products {
     grid-template-columns: auto auto;
   }
 }
 @media screen and (max-width: 380px) {
-  .productsMain {
+  .products {
     grid-template-columns: auto;
   }
 }
@@ -281,16 +289,49 @@ li:hover::after {
   }
 }
 
-.login {
+.login, .submitButton {
   border: none;
   padding: 0.65em 2em;
   border-radius: 2.5em;
   margin-left: 0.65em;
-  font-size: 1.5em;
+  font-size: 1.25em;
   max-width: -moz-fit-content;
   max-width: fit-content;
   background-color: rgba(218, 223, 230, 0.3);
   cursor: pointer;
+}
+
+.submitButton {
+  margin-top: 1em;
+}
+
+.search {
+  margin-top: 0;
+  font-size: 1em;
+  padding: 0.25;
+}
+
+.deleteButton, .updateButton {
+  margin-top: 1em;
+  border: none;
+  padding: 0.5em;
+  background-color: rgb(238, 222, 200);
+  border-radius: 3em;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+.updateButton {
+  background-color: rgb(240, 211, 170);
+}
+
+.addButton {
+  border: none;
+  cursor: pointer;
+  width: 7.5em !important;
+}
+.addButton :active {
+  border: none;
 }
 
 .svg-container {
@@ -308,7 +349,7 @@ li:hover::after {
 }
 
 .svg-container:hover {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .hamburger-menu-icon {
@@ -324,6 +365,8 @@ li:hover::after {
 
 .shopping-cart {
   cursor: pointer;
+  background-color: none;
+  border: none;
 }
 
 input {
@@ -341,13 +384,16 @@ input {
   }
 }
 
-.search-button {
+#search {
   border-radius: 2.5em;
   margin-left: 1em;
 }
 
-.search-button:hover {
-  background-color: rgba(198, 203, 211, 0.75);
+.searchForm {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0.5em;
+  justify-content: center;
 }
 
 .loginForm {
@@ -371,17 +417,109 @@ label {
   margin-bottom: 1em;
 }
 
+.addForm {
+  padding: 2em;
+}
+
+.productInput {
+  font-size: 1em;
+}
+
 .productName, .productCategory, .productPrice {
   margin-top: 0.5em;
   font-size: 2em;
+  text-align: center;
 }
 
 .productImage {
   max-width: 17.5em;
+  margin: auto;
 }
 
 .productContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 1em;
   border: solid 0.5em rgb(255, 233, 203);
   border-radius: 2em;
+}
+
+.addToCart {
+  width: 100%;
+  padding: 0.5em;
+  font-size: 2em;
+  background-color: rgb(245, 206, 182);
+  border: none;
+  border-radius: 2em;
+  margin-top: 0.5em;
+}
+
+.addToCart:active {
+  border: none;
+}
+
+.addToCart:hover {
+  cursor: pointer;
+  background-color: rgb(247, 171, 124);
+}
+
+.cartView {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 5em;
+  min-width: 15%;
+  min-height: 15%;
+  top: 10em;
+  margin: 1em;
+  overflow: hidden;
+  background-color: rgb(252, 206, 155);
+  align-items: center;
+  opacity: 0.9;
+}
+@media screen and (max-width: 768px) {
+  .cartView {
+    margin: auto;
+    min-width: 30%;
+    min-height: 15%;
+    left: 5%;
+    top: 20em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .cartView {
+    padding: 0.5em;
+    min-height: 10%;
+    min-width: 50%;
+  }
+}
+
+.closed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cartContainer {
+  display: flex;
+  margin-top: 1em;
+  align-items: center;
+  justify-content: flex-start;
+}
+.cartContainer img {
+  max-width: 7.5em;
+}
+@media screen and (max-width: 576px) {
+  .cartContainer img {
+    max-width: 3em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .cartContainer {
+    font-size: 0.65em;
+  }
+}
+.cartContainer > * {
+  margin-right: 1em;
 }/*# sourceMappingURL=main.css.map */

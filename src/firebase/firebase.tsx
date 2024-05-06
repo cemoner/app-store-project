@@ -1,7 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs,
+  addDoc,deleteDoc, doc, updateDoc,
+  query,where,CollectionReference
+ } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -14,7 +17,6 @@ const firebaseConfig = {
   measurementId: "G-MJHK4W30BD"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore();
@@ -29,27 +31,93 @@ interface Product {
   productImage: string;
   productPrice: number;
   productCategory: string;
-  id: string; // Include id field
+  id: string;
 }
 
 
+function retrieveDocs(): Promise<Product[]>;
+function retrieveDocs(condition: string): Promise<Product[]>;
+function retrieveDocs(condition?: string): Promise<Product[]> {
+    let objects: Product[] = [];
+    let queryRef = condition ? query(colRef, where("productName", "==", condition)) : colRef;
 
+    console.log(query);
 
-function retrieveDocs(){
-  let objects: Product[] = [];
-    return getDocs(colRef)
-    .then((items) => {
-      items.docs.forEach((doc) => {
-        const data = doc.data() as Product;
-        objects.push({...data, id: doc.id});
+    return getDocs(queryRef)
+        .then((items) => {
+            items.docs.forEach((doc) => {
+                const data = doc.data() as Product;
+                objects.push({ ...data, id: doc.id });
+            })
+            return objects;
+        })
+        .catch(err => {
+            console.log(err.message);
+            return [];
+        });
+}
+
+function addApp(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    
+
+    console.log("hellooo");
+    const addForm = document.querySelector(".addForm") as HTMLFormElement;
+    const productImageInput = addForm.querySelector('#productImage') as HTMLInputElement;
+    const productNameInput = addForm.querySelector('#productName') as HTMLInputElement;
+    const productCategoryInput = addForm.querySelector('#productCategory') as HTMLInputElement;
+    const productPriceInput = addForm.querySelector('#productPrice') as HTMLInputElement;
+
+    const productPrice = parseFloat(productPriceInput.value);
+
+    addDoc(colRef, {
+        productImage: productImageInput.value,
+        productName: productNameInput.value,
+        productCategory: productCategoryInput.value,
+        productPrice: productPrice
+    })
+      .then(() => {
+        window.location.reload();
       })
-      return objects;
+}
+
+function deleteApp(event: React.MouseEvent<HTMLButtonElement, MouseEvent>,id:string){
+  event.preventDefault();
+  const docRef = doc(db,"Products",id);
+  deleteDoc(docRef)
+    .then(() =>  {
+      window.location.reload();
     })
-    .catch(err => {
-      console.log(err.message);
-      return [];
+
+}
+
+function updateApp(event: React.MouseEvent<HTMLButtonElement,MouseEvent>,id:string) {
+  event.preventDefault();
+  const docRef = doc(db, "Products", id);
+  const productContainer = document.querySelector(`.productContainer[data-id="${id}"]`);
+  if (!productContainer) return;
+  console.log("hello")
+  const productNameInput = productContainer.querySelector('.nameInput') as HTMLInputElement;
+  const productCategoryInput = productContainer.querySelector('.categoryInput') as HTMLInputElement;
+  const productPriceInput = productContainer.querySelector('.priceInput') as HTMLInputElement;
+  const productPrice = parseFloat(productPriceInput.value);
+
+  if (productNameInput.value && productCategoryInput.value && !isNaN(productPrice)) {
+    updateDoc(docRef, {
+      productName: productNameInput.value,
+      productCategory: productCategoryInput.value,
+      productPrice: productPrice
     })
+      .then(() => {
+        console.log("Document successfully updated!");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error updating document:", error);
+      });
+  } else {
+    console.error("Error: Input fields cannot be empty and product price must be a valid number");
   }
+}
 
-
-export {app,auth,db,retrieveDocs};
+export {app,auth,db,retrieveDocs,addApp,deleteApp,updateApp};

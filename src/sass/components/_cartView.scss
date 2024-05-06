@@ -1,0 +1,58 @@
+@use "../abstracts/" as a;
+
+
+.cartView {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 5em;
+    min-width:15%;
+    min-height:15%;
+    top:10em;
+    margin:1em;
+    overflow: hidden;
+    background-color: rgb(252, 206, 155);
+    align-items: center;
+    @include a.media-max(small) {
+        margin:auto;
+        min-width: 30%;
+        min-height: 15%;
+        left: 5%;
+        top:20em;
+    }
+    @include a.media-max(very-small){
+        padding:0.5em;
+        min-height:10%;
+        min-width:50%;
+    }
+    opacity: 0.9;
+}
+
+.closed {
+ 
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.cartContainer {
+    display:flex;
+    margin-top:1em;
+    img {
+        max-width: 7.5em;
+        @include a.media-max(very-small){
+            max-width: 3em;;
+        }
+    }
+    align-items: center;
+    justify-content: flex-start;
+
+    @include a.media-max(very-small){
+        font-size:0.65em;
+    }
+
+    > * {
+        margin-right:1em;
+    }
+}

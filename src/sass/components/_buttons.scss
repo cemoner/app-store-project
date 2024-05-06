@@ -12,14 +12,46 @@
         }
 }
 
-.login {
+.login,.submitButton {
     border:none;
     padding:0.65em 2em;
     border-radius: 2.5em;
     margin-left:0.65em;
-    font-size:1.5em;
+    font-size:1.25em;
     max-width: fit-content;
     background-color: rgba(218, 223, 230, 0.3);
     cursor: pointer;
 }
 
+.submitButton {
+    margin-top:1em;
+}
+
+.search {
+    margin-top:0;
+    font-size:1em;
+    padding:0.25;
+}
+
+.deleteButton,.updateButton {
+    margin-top:1em;
+    border:none;
+    padding:0.5em;
+    background-color: rgb(238, 222, 200);
+    border-radius:3em;
+    cursor: pointer;
+    font-size:1.5em;
+}
+
+.updateButton {
+    background-color:rgb(240, 211, 170) ;
+}
+
+.addButton {
+    border:none;
+    cursor: pointer;
+    width:7.5em !important;
+    :active {
+        border:none;
+    }
+}

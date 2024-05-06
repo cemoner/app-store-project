@@ -1,15 +1,41 @@
 .productName,.productCategory,.productPrice {
     margin-top:0.5em;
     font-size:2em;
+    text-align: center;
 }
 
 
 .productImage {
     max-width:17.5em;
+    margin:auto;
 }
 
 .productContainer {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
     padding:1em;
     border:solid 0.5em rgb(255, 233, 203);
     border-radius: 2em;
+}
+
+.addToCart {
+    width:100%;
+    padding:0.5em;
+    font-size:2em;
+    background-color: rgb(245, 206, 182);
+    border:none;
+    border-radius: 2em;
+    margin-top:0.5em;
+    
+}
+
+.addToCart:active {
+    border:none;
+}
+
+
+.addToCart:hover {
+    cursor: pointer;
+    background-color:rgb(247, 171, 124) ;
 }

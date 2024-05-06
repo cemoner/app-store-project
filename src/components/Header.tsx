@@ -1,31 +1,36 @@
-import Hamburger from './Hamburger-Menu.tsx'
+import Hamburger from './Hamburger-Menu.tsx';
+import { useState } from 'react';;
+import { useNavigate } from 'react-router-dom';
 
-import React, { createContext, useContext, ReactNode } from 'react';
-import {useLocation } from 'react-router-dom';
 
-// Create a context to manage the current location
-const LocationContext = createContext<string>('');
+interface ProductsProps {
+    isAdminPage:boolean;
+}
 
-// Custom hook to access the current location
-export const useCurrentLocation = () => useContext(LocationContext);
-
-// LocationProvider component to provide the current location context
-const LocationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const location = useLocation();
-
-    return (
-        <LocationContext.Provider value={location.pathname}>
-            {children}
-        </LocationContext.Provider>
-    );
+const toggleCart = () => {
+    const cartView = document.querySelector('.cartView');
+    if(cartView) {
+        cartView.classList.toggle('closed');
+    }
 };
 
+  function Header({isAdminPage}:ProductsProps){
+    const [searchQuery, setSearchQuery] = useState('');
+    const [query, setQuery] = useState<string | null>(null);
+    const navigate = useNavigate();
 
-  const Header: React.FC = () => {
+    const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setQuery(searchQuery)
+        navigate(`/search?query=${encodeURIComponent(searchQuery)}&isAdminPage=${isAdminPage}`);
+    };
 
-    const currentLocation = useCurrentLocation();
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(event.target.value);
+    };
+
     return (
-        <header>
+        <> <header>
             <nav>
                 <div className="svg-container logo">
                     <a href="#">
@@ -44,10 +49,13 @@ const LocationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
                     </a>
                 </div>
                 <ul className="navigation-list">
-                    <li className="nav-item"><a href="#">Home</a></li>
+                    {isAdminPage ? (
+                             <li className="nav-item"><a href="/admin">Home</a></li>
+                        ) : (
+                            <li className="nav-item"><a href="/">Home</a></li>
+                        )}
                     <li className="nav-item"><a href="">About</a></li>
                     <li className="nav-item"><a href="">Contact</a></li>
-                    <li className="nav-item"><a href="">Apps</a></li>
                 </ul>
                 <div className="svg-container hamburger-menu-icon">
                     <svg min-width="20px" min-height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +65,7 @@ const LocationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
                     </svg>
                 </div>
                 <div className="buttons">
-                               <div className='svg-container shopping-cart'>
+                               <button className='svg-container shopping-cart' onClick={toggleCart}>
                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clipPath="url(#clip0_901_3095)">
                                         <path d="M10 24L9 20L8 16L7 12L6 8H31L29 22C28.86 23.04 28.12 24 27 24H10Z" fill="#FFC44D"/>
@@ -70,27 +78,29 @@ const LocationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
                                         </clipPath>
                                         </defs>
                                     </svg>
-                               </div>
+                                    <div className="cartView closed">
+                                    </div>
+                               </button>
                     <div className="search-button">
-                        <form action="#" method="post">
-                            <input type="text" name="search" id="Search" placeholder="Search"></input>
+                        <form action="#" className="searchForm" onSubmit={handleSearch}>
+                            <input type="text" name="search" id="Search" placeholder="Search" onChange={handleChange}></input>
+                            <button type="submit" className="submitButton search">Search</button>
                         </form>
                     </div>
-                    <button className="login">
-                        {currentLocation === '/admin' ? (
+                        {isAdminPage ? (
+                             <button className="login">
                                 <a href="/">Sign Out</a>
-                            ) : (
+                            </button>
+                        ) : (
+                            <button className="login">
                                 <a href="/login">Login</a>
-                            )
-                        }
-                    </button>
+                            </button>
+                        )}
                 </div>
             </nav>
             <Hamburger/>
         </header>
+        </>     
     )
 }
-
 export default Header
-
-export { LocationProvider };

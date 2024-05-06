@@ -17,14 +17,12 @@ const Hamburger: React.FC = () => {
       };
     }
 
-    // Ensure cleanup if the elements aren't found
     return () => {};
-  }, []); // empty dependency array ensures the effect runs once on mount
+  }, []);
 
   return (
-    // Your component JSX
     <div>
-      {/* Your JSX content here */}
+      {}
     </div>
   );
 };
